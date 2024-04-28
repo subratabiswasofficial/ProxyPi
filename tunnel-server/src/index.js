@@ -3,18 +3,13 @@ import 'dotenv/config';
 
 const server = net.createServer();
 
-server.on('connection', async (clientToLocalSocket) => {
-    console.log('New local connection created');
-
-    const localToProxySocket = net.createConnection({
-        host: 'localhost',
-        port: 8080
+server.on('connection', async (clientSocket) => {
+    console.log('New local connection created with client');
+    clientSocket.on('end', () => {
+        console.log('New local connection ended with client');
     });
-
-    clientToLocalSocket.pipe(localToProxySocket);
-    localToProxySocket.pipe(clientToLocalSocket);
 });
 
 server.listen(process.env.TUNNEL_PORT, () => {
-    console.log('LOCAL SERVER RUNNING ON PORT', process.env.TUNNEL_PORT);
+    console.log('TUNNEL SERVER RUNNING ON PORT', process.env.TUNNEL_PORT);
 });

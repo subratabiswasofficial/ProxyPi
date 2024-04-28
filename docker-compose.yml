@@ -35,3 +35,16 @@ services:
       - TUNNEL_PORT=8799
     volumes:
       - ./tunnel-server:/app/tunnel-server
+
+  # local-to-tunnel-server:
+  #   build: ./local-to-tunnel-server
+  #   ports:
+  #     - 8798:8798
+  #   environment:
+  #     # - LOCAL_TO_TUNNEL_PORT=8798
+  #     - TUNNEL_PORT=8799
+  #   volumes:
+  #     - ./local-to-tunnel-server:/app/local-to-tunnel-server
+  #   depends_on:
+  #     - tunnel-server
+
